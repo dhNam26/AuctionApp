@@ -1,22 +1,16 @@
 package main.java.com.auction.model;
 
-public class Item {
-    private String id;
+public class Item extends Entity {
     private String name;
     private String description;
     private double startingPrice;
     private ItemCategory category;
 
-    public Item(String id, String name, String description, double startingPrice, ItemCategory category) {
-        this.id = id;
+    public Item(String name, String description, double startingPrice, ItemCategory category) {
         this.name = name;
         this.description = description;
         this.startingPrice = startingPrice;
         this.category = category;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getName() {
@@ -33,10 +27,6 @@ public class Item {
 
     public ItemCategory getCategory() {
         return category;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setName(String name) {
