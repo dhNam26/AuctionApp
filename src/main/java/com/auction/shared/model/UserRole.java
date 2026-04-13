@@ -1,4 +1,4 @@
-package com.auction.model;
+package com.auction.shared.model;
 
 public enum UserRole {
     ADMIN,

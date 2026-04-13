@@ -1,4 +1,4 @@
-package com.auction.model;
+package com.auction.shared.model;
 
 import java.util.Objects;
 

@@ -1,4 +1,4 @@
-package com.auction.model;
+package com.auction.shared.model;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;

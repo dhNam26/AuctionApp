@@ -1,4 +1,4 @@
-package com.auction.model;
+package com.auction.shared.model;
 
 public class Bidder extends User {
     public Bidder(String username, String password, String displayName) {
