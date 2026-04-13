@@ -58,12 +58,12 @@ public class Auction extends Entity {
                 && !now.isAfter(endTime);
     }
 
-    public synchronized boolean placeBid(String bidderId, String bidderName, double bidAmount, boolean automaticBid) {
-        if (bidderId == null || bidderId.isBlank() || bidAmount <= 0 || !canAcceptBid()) {
+    public synchronized boolean placeBid(String bidderId, String bidderName, BigDecimal bidAmount, boolean automaticBid) {
+        if (bidderId == null || bidderId.isBlank() || bidAmount.compareTo(BigDecimal.ZERO) <= 0 || !canAcceptBid()) {
             return false;
         }
 
-        if (bidAmount <= currentPrice) {
+        if (bidAmount.compareTo(currentPrice) <= 0) {
             return false;
         }
 
@@ -124,11 +124,11 @@ public class Auction extends Entity {
         this.sellerName = requireNotBlank(sellerName, "sellerName");
     }
 
-    public double getCurrentPrice() {
+    public BigDecimal getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(double currentPrice) {
+    public void setCurrentPrice(BigDecimal currentPrice) {
         this.currentPrice = currentPrice;
     }
 
