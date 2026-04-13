@@ -7,6 +7,7 @@ public class Item extends Entity {
     private ItemCategory category;
 
     public Item(String name, String description, double startingPrice, ItemCategory category) {
+        super();
         this.name = name;
         this.description = description;
         this.startingPrice = startingPrice;
