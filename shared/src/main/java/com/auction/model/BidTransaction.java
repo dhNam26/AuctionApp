@@ -1,9 +1,7 @@
 package com.auction.model;
 import java.time.LocalDateTime;
 
-public class BidTransaction {
-    private String id;
-    private String bidId;
+public class BidTransaction extends Entity {
     private String auctionId;
     private String bidderId;
     private double bidAmount;
@@ -11,29 +9,12 @@ public class BidTransaction {
     private boolean automaticBid;
 
     public BidTransaction(String id, String bidId, String auctionId, String bidderId, double bidAmount, LocalDateTime bidTime, boolean automaticBid) {
-        this.id = id;
-        this.bidId = bidId;
+        super();
         this.auctionId = auctionId;
         this.bidderId = bidderId;
         this.bidAmount = bidAmount;
         this.bidTime = bidTime;
         this.automaticBid = automaticBid;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getBidId() {
-        return bidId;
-    }
-
-    public void setBidId(String bidId) {
-        this.bidId = bidId;
     }
 
     public String getAuctionId() {
