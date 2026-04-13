@@ -1,5 +1,7 @@
 package com.auction.shared.model;
 
+
+
 public class Item extends Entity {
     private String name;
     private String description;
