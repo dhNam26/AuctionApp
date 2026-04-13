@@ -1,14 +1,14 @@
 package com.auction.shared.model;
 
-
+import java.math.BigDecimal;
 
 public class Item extends Entity {
     private String name;
     private String description;
-    private double startingPrice;
+    private BigDecimal startingPrice;
     private ItemCategory category;
 
-    public Item(String name, String description, double startingPrice, ItemCategory category) {
+    public Item(String name, String description, BigDecimal startingPrice, ItemCategory category) {
         super();
         this.name = name;
         this.description = description;
@@ -24,7 +24,7 @@ public class Item extends Entity {
         return description;
     }
 
-    public double getStartingPrice() {
+    public BigDecimal getStartingPrice() {
         return startingPrice;
     }
 
@@ -40,7 +40,7 @@ public class Item extends Entity {
         this.description = description;
     }
 
-    public void setStartingPrice(double startingPrice) {
+    public void setStartingPrice(BigDecimal startingPrice) {
         this.startingPrice = startingPrice;
     }
 

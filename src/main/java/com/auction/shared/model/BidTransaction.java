@@ -1,14 +1,15 @@
 package com.auction.shared.model;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class BidTransaction extends Entity {
     private String auctionId;
     private String bidderId;
-    private double bidAmount;
+    private BigDecimal bidAmount;
     private LocalDateTime bidTime;
     private boolean automaticBid;
 
-    public BidTransaction(String id, String bidId, String auctionId, String bidderId, double bidAmount, LocalDateTime bidTime, boolean automaticBid) {
+    public BidTransaction(String id, String bidId, String auctionId, String bidderId, BigDecimal bidAmount, LocalDateTime bidTime, boolean automaticBid) {
         super();
         this.auctionId = auctionId;
         this.bidderId = bidderId;
@@ -33,11 +34,11 @@ public class BidTransaction extends Entity {
         this.bidderId = bidderId;
     }
 
-    public double getBidAmount() {
+    public BigDecimal getBidAmount() {
         return bidAmount;
     }
 
-    public void setBidAmount(double bidAmount) {
+    public void setBidAmount(BigDecimal bidAmount) {
         this.bidAmount = bidAmount;
     }
 
