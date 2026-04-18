@@ -15,8 +15,8 @@ public class Item extends Entity {
         super();
         this.name = requireNotBlank(name, "name");
         this.description = requireNotBlank(description, "description");
-        this.startingPrice = Objects.requireNonNull(startingPrice, "startingPrice");
-        this.category = Objects.requireNonNull(category, "category");
+        this.startingPrice = requireNonNull(startingPrice, "startingPrice");
+        this.category = requireNonNull(category, "category");
     }
 
     public String getName() {
@@ -36,29 +36,39 @@ public class Item extends Entity {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = requireNotBlank(name, "name");
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = requireNotBlank(description, "description");
     }
 
     public void setStartingPrice(BigDecimal startingPrice) {
-        this.startingPrice = startingPrice;
+        this.startingPrice = requireNonNull(startingPrice, "startingPrice");
     }
 
     public void setCategory(ItemCategory category) {
-        this.category = category;
+        this.category = requireNonNull(category, "category");
     }
 
     public Map<String, String> getAttributes() {
         Map<String, String> attributes = new LinkedHashMap<>();
+        attributes.put("id", getId());
+        attributes.put("timeCreate", getCreatedAt().toString());
+        attributes.put("name", getName());
+        attributes.put("description", getDescription());
+        attributes.put("startingPrice", getStartingPrice().toString());
         return attributes;
     }
-    public String requireNotBlank(String value, String field) {
+
+    protected static String requireNotBlank(String value, String field) {
         if (value == null || value.isBlank()) {
             throw new IllegalArgumentException(field + " cannot be blank");
         }
         return value.trim();
+    }
+
+    protected static <T> T requireNonNull(T value, String field) {
+        return Objects.requireNonNull(value, field);
     }
 }
