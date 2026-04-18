@@ -15,7 +15,9 @@ public class Item extends Entity {
         super();
         this.name = requireNotBlank(name, "name");
         this.description = requireNotBlank(description, "description");
-        this.startingPrice = requireNonNull(startingPrice, "startingPrice");
+        if (startingPrice.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("startingPrice must be greater than 0");
+        }
         this.category = requireNonNull(category, "category");
     }
 
