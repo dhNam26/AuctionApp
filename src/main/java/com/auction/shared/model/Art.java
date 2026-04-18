@@ -1,5 +1,6 @@
 package com.auction.shared.model;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ public class Art extends Item {
     private String artist;
     private String medium;
 
-    public Art(String title, String description, double startingPrice, String artist, String medium) {
+    public Art(String title, String description, BigDecimal startingPrice, String artist, String medium) {
         super(title, description, startingPrice, ItemCategory.ART);
         this.artist = artist;
         this.medium = medium;

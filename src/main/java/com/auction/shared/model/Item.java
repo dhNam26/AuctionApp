@@ -1,6 +1,8 @@
 package com.auction.shared.model;
 
 import java.math.BigDecimal;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Item extends Entity {
     private String name;
@@ -46,5 +48,10 @@ public class Item extends Entity {
 
     public void setCategory(ItemCategory category) {
         this.category = category;
+    }
+
+    public Map<String, String> getAttributes() {
+        Map<String, String> attributes = new LinkedHashMap<>();
+        return attributes;
     }
 }

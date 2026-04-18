@@ -1,5 +1,6 @@
 package com.auction.shared.model;
 
+import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -8,7 +9,7 @@ public class Vehicle extends Item {
     private String manufacturer;
     private int year;
 
-    public Vehicle(String title, String description, double startingPrice, String manufacturer, int year) {
+    public Vehicle(String title, String description, BigDecimal startingPrice, String manufacturer, int year) {
         super(title, description, startingPrice, ItemCategory.VEHICLE);
         this.manufacturer = manufacturer;
         this.year = year;
