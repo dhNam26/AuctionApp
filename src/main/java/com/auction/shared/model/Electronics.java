@@ -1,6 +1,6 @@
 package com.auction.shared.model;
 
-import java.util.LinkedHashMap;
+import java.math.BigDecimal;
 import java.util.Map;
 
 public class Electronics extends Item {
@@ -8,10 +8,10 @@ public class Electronics extends Item {
     private String brand;
     private String condition;
 
-    public Electronics(String title, String description, double startingPrice, String brand, String condition) {
-        super(title, description, startingPrice, ItemCategory.ELECTRONICS);
-        this.brand = brand;
-        this.condition = condition;
+    public Electronics(String name, String description, BigDecimal startingPrice, String brand, String condition) {
+        super(name, description, startingPrice, ItemCategory.ELECTRONICS);
+        this.brand = requireNotBlank(brand, "brand");
+        this.condition = requireNotBlank(condition, "condition");
     }
 
     public String getBrand() {
@@ -23,18 +23,18 @@ public class Electronics extends Item {
     }
 
     public void setBrand(String brand) {
-        this.brand = brand;
+        this.brand = requireNotBlank(brand, "brand");
     }
 
     public void setCondition(String condition) {
-        this.condition = condition;
+        this.condition = requireNotBlank(condition, "condition");
     }
 
     @Override
     public Map<String, String> getAttributes() {
-        Map<String, String> attributes = new LinkedHashMap<>();
-        attributes.put("brand", brand);
-        attributes.put("condition", condition);
+        Map<String, String> attributes = super.getAttributes();
+        attributes.put("brand", getBrand());
+        attributes.put("condition", getCondition());
         return attributes;
     }
 }

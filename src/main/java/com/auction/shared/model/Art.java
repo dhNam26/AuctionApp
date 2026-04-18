@@ -1,6 +1,6 @@
 package com.auction.shared.model;
 
-import java.util.LinkedHashMap;
+import java.math.BigDecimal;
 import java.util.Map;
 
 public class Art extends Item {
@@ -8,10 +8,10 @@ public class Art extends Item {
     private String artist;
     private String medium;
 
-    public Art(String title, String description, double startingPrice, String artist, String medium) {
-        super(title, description, startingPrice, ItemCategory.ART);
-        this.artist = artist;
-        this.medium = medium;
+    public Art(String name, String description, BigDecimal startingPrice, String artist, String medium) {
+        super(name, description, startingPrice, ItemCategory.ART);
+        this.artist = requireNotBlank(artist, "artist");
+        this.medium = requireNotBlank(medium, "medium");
     }
 
     public String getArtist() {
@@ -23,18 +23,18 @@ public class Art extends Item {
     }
 
     public void setArtist(String artist) {
-        this.artist = artist;
+        this.artist = requireNotBlank(artist, "artist");
     }
 
     public void setMedium(String medium) {
-        this.medium = medium;
+        this.medium = requireNotBlank(medium, "medium");
     }
 
     @Override
     public Map<String, String> getAttributes() {
-        Map<String, String> attributes = new LinkedHashMap<>();
-        attributes.put("artist", artist);
-        attributes.put("medium", medium);
+        Map<String, String> attributes = super.getAttributes();
+        attributes.put("artist", getArtist());
+        attributes.put("medium", getMedium());
         return attributes;
     }
 }
