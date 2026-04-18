@@ -9,7 +9,7 @@ public class BidTransaction extends Entity {
     private LocalDateTime bidTime;
     private boolean automaticBid;
 
-    public BidTransaction(String id, String bidId, String auctionId, String bidderId, BigDecimal bidAmount, LocalDateTime bidTime, boolean automaticBid) {
+    public BidTransaction(String auctionId, String bidderId, BigDecimal bidAmount, LocalDateTime bidTime, boolean automaticBid) {
         super();
         this.auctionId = auctionId;
         this.bidderId = bidderId;

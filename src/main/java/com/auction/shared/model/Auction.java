@@ -32,14 +32,14 @@ public class Auction extends Entity {
     }
 
     public synchronized void updateStatus() {
-        if (status == AuctionStatus.PAID || status == AuctionStatus.CANCELED) {
+        if (status == AuctionStatus.PAID || status == AuctionStatus.CANCELED || status ==  AuctionStatus.FINISHED) {
             return;
         }
 
         LocalDateTime now = LocalDateTime.now();
         if (now.isBefore(startTime)) {
             status = AuctionStatus.OPEN;
-        } else if (!now.isAfter(endTime)) {
+        } else if (now.isBefore(endTime)) {
             status = AuctionStatus.RUNNING;
         } else {
             status = AuctionStatus.FINISHED;
@@ -55,7 +55,7 @@ public class Auction extends Entity {
         LocalDateTime now = LocalDateTime.now();
         return status == AuctionStatus.RUNNING
                 && !now.isBefore(startTime)
-                && !now.isAfter(endTime);
+                && now.isBefore(endTime);
     }
 
     public synchronized boolean placeBid(String bidderId, String bidderName, BigDecimal bidAmount, boolean automaticBid) {
@@ -71,8 +71,6 @@ public class Auction extends Entity {
         leadingBidderId = bidderId.trim();
         leadingBidderName = bidderName == null || bidderName.isBlank() ? null : bidderName.trim();
         bidHistory.add(new BidTransaction(
-                null,
-                null,
                 getId(),
                 leadingBidderId,
                 bidAmount,
@@ -97,6 +95,9 @@ public class Auction extends Entity {
     }
 
     public synchronized void cancelAuction() {
+        if (status == AuctionStatus.FINISHED || status == AuctionStatus.PAID) {
+            return;
+        }
         status = AuctionStatus.CANCELED;
     }
 

@@ -1,5 +1,6 @@
 package com.auction.shared.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -7,11 +8,11 @@ public class AutoBidConfig {
 
     private final String bidderId;
     private final String bidderName;
-    private final double maxBid;
-    private final double increment;
+    private final BigDecimal maxBid;
+    private final BigDecimal increment;
     private final LocalDateTime registeredAt;
 
-    public AutoBidConfig(String bidderId, String bidderName, double maxBid, double increment, LocalDateTime registeredAt) {
+    public AutoBidConfig(String bidderId, String bidderName, BigDecimal maxBid, BigDecimal increment, LocalDateTime registeredAt) {
         this.bidderId = Objects.requireNonNull(bidderId, "bidderId");
         this.bidderName = Objects.requireNonNull(bidderName, "bidderName");
         this.maxBid = maxBid;
@@ -27,11 +28,11 @@ public class AutoBidConfig {
         return bidderName;
     }
 
-    public double getMaxBid() {
+    public BigDecimal getMaxBid() {
         return maxBid;
     }
 
-    public double getIncrement() {
+    public BigDecimal getIncrement() {
         return increment;
     }
 
