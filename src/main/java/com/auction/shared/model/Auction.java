@@ -83,6 +83,9 @@ public class Auction extends Entity {
     }
 
     public synchronized void finishAuction() {
+        if (status == AuctionStatus.CANCELED || status == AuctionStatus.PAID || status == AuctionStatus.FINISHED){
+            return;
+        }
         status = AuctionStatus.FINISHED;
         if (leadingBidderId != null) {
             winnerBidderId = leadingBidderId;
