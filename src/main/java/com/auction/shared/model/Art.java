@@ -9,10 +9,10 @@ public class Art extends Item {
     private String artist;
     private String medium;
 
-    public Art(String title, String description, BigDecimal startingPrice, String artist, String medium) {
-        super(title, description, startingPrice, ItemCategory.ART);
-        this.artist = artist;
-        this.medium = medium;
+    public Art(String name, String description, BigDecimal startingPrice, String artist, String medium) {
+        super(name, description, startingPrice, ItemCategory.ART);
+        this.artist = requireNotBlank(artist, "artist");
+        this.medium = requireNotBlank(medium, "medium");
     }
 
     public String getArtist() {
@@ -34,8 +34,13 @@ public class Art extends Item {
     @Override
     public Map<String, String> getAttributes() {
         Map<String, String> attributes = new LinkedHashMap<>();
-        attributes.put("artist", artist);
-        attributes.put("medium", medium);
+        attributes.put("id", getId());
+        attributes.put("timeCreate", getCreatedAt().toString());
+        attributes.put("name", getName());
+        attributes.put("description", getDescription());
+        attributes.put("startingPrice", getStartingPrice().toString());
+        attributes.put("artist", getArtist());
+        attributes.put("medium", getMedium());
         return attributes;
     }
 }

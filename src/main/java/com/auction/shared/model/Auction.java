@@ -47,6 +47,10 @@ public class Auction extends Entity {
                 winnerBidderId = leadingBidderId;
                 winnerBidderName = leadingBidderName;
             }
+            else{
+                winnerBidderId = null;
+                winnerBidderName = null;
+            }
         }
     }
 
@@ -69,14 +73,12 @@ public class Auction extends Entity {
 
         currentPrice = bidAmount;
         leadingBidderId = bidderId.trim();
-        leadingBidderName = bidderName == null || bidderName.isBlank() ? null : bidderName.trim();
-        bidHistory.add(new BidTransaction(
-                getId(),
-                leadingBidderId,
-                bidAmount,
-                LocalDateTime.now(),
-                automaticBid
-        ));
+        if (bidderName == null || bidderName.isBlank()) {
+            leadingBidderName = null;
+        } else {
+            leadingBidderName = bidderName.trim();
+        }
+        bidHistory.add(new BidTransaction(getId(), leadingBidderId, bidAmount, LocalDateTime.now(), automaticBid));
         return true;
     }
 
@@ -85,6 +87,10 @@ public class Auction extends Entity {
         if (leadingBidderId != null) {
             winnerBidderId = leadingBidderId;
             winnerBidderName = leadingBidderName;
+        }
+        else{
+            winnerBidderName = null;
+            winnerBidderId = null;
         }
     }
 

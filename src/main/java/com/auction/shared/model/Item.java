@@ -3,6 +3,7 @@ package com.auction.shared.model;
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Item extends Entity {
     private String name;
@@ -12,10 +13,10 @@ public class Item extends Entity {
 
     public Item(String name, String description, BigDecimal startingPrice, ItemCategory category) {
         super();
-        this.name = name;
-        this.description = description;
-        this.startingPrice = startingPrice;
-        this.category = category;
+        this.name = requireNotBlank(name, "name");
+        this.description = requireNotBlank(description, "description");
+        this.startingPrice = Objects.requireNonNull(startingPrice, "startingPrice");
+        this.category = Objects.requireNonNull(category, "category");
     }
 
     public String getName() {
@@ -53,5 +54,11 @@ public class Item extends Entity {
     public Map<String, String> getAttributes() {
         Map<String, String> attributes = new LinkedHashMap<>();
         return attributes;
+    }
+    public String requireNotBlank(String value, String field) {
+        if (value == null || value.isBlank()) {
+            throw new IllegalArgumentException(field + " cannot be blank");
+        }
+        return value.trim();
     }
 }

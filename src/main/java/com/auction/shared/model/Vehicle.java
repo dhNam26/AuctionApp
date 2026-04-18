@@ -7,19 +7,19 @@ import java.util.Map;
 public class Vehicle extends Item {
 
     private String manufacturer;
-    private int year;
+    private String year;
 
-    public Vehicle(String title, String description, BigDecimal startingPrice, String manufacturer, int year) {
-        super(title, description, startingPrice, ItemCategory.VEHICLE);
-        this.manufacturer = manufacturer;
-        this.year = year;
+    public Vehicle(String name, String description, BigDecimal startingPrice, String manufacturer, String year) {
+        super(name, description, startingPrice, ItemCategory.VEHICLE);
+        this.manufacturer = requireNotBlank(manufacturer, "manufacturer");
+        this.year = requireNotBlank(year, "year");
     }
 
     public String getManufacturer() {
         return manufacturer;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
@@ -27,15 +27,20 @@ public class Vehicle extends Item {
         this.manufacturer = manufacturer;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
     @Override
     public Map<String, String> getAttributes() {
         Map<String, String> attributes = new LinkedHashMap<>();
-        attributes.put("manufacturer", manufacturer);
-        attributes.put("year", Integer.toString(year));
+        attributes.put("id", getId());
+        attributes.put("timeCreate", getCreatedAt().toString());
+        attributes.put("name", getName());
+        attributes.put("description", getDescription());
+        attributes.put("startingPrice", getStartingPrice().toString());
+        attributes.put("manufacturer", getManufacturer());
+        attributes.put("year", getYear());
         return attributes;
     }
 }
