@@ -18,6 +18,9 @@ public class Item extends Entity {
         if (startingPrice.compareTo(BigDecimal.ZERO) <= 0) {
             throw new IllegalArgumentException("startingPrice must be greater than 0");
         }
+        else{
+            this.startingPrice = startingPrice;
+        }
         this.category = requireNonNull(category, "category");
     }
 
