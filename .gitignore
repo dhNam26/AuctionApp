@@ -19,3 +19,4 @@
 .idea/
 >>>>>>> feature/auction-model
 >>>>>>> 4ed9b82 (Remove IntelliJ files from tracking)
+/target/
