@@ -1,22 +1,25 @@
-<<<<<<< HEAD
-# Default ignored files
-/shelf/
-/workspace.xml
-# Ignored default folder with query files
-/queries/
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
-# Editor-based HTTP Client requests
-/httpRequests/
-=======
+# OS files
 .DS_Store
-<<<<<<< HEAD
-.idea
->>>>>>> feature/auction-model
-=======
-*.iml
+Thumbs.db
+# IntelliJ IDEA
 .idea/
->>>>>>> feature/auction-model
->>>>>>> 4ed9b82 (Remove IntelliJ files from tracking)
+*.iml
+*.iws
+# Build directories
 /target/
+/build/
+/out/
+# Logs
+*.log
+# Environment files
+.env
+.env.*
+# IDE / Workspace specific
+/workspace.xml
+/shelf/
+/queries/
+/datasources/
+/dataSources.local.xml
+/httpRequests/
+# Tooling
+.cursor/
