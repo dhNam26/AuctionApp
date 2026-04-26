@@ -1,0 +1,19 @@
+package com.auction.shared.net;
+
+public enum MessageType {
+    LOGIN,
+    REGISTER,
+
+    LIST_AUCTIONS,
+    GET_AUCTION_DETAIL,
+    LIST_MY_AUCTION,
+
+    CREATE_AUCTION,
+    UPDATE_AUCTION,
+    CANCEL_AUCTION,
+    FINISH_AUCTION,
+
+    PLACE_BID,
+    EVENT_AUCTION_UPDATED,
+    EVEN_AUCTION_FINISH;
+}
