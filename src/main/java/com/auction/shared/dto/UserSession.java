@@ -6,14 +6,14 @@ import java.io.Serializable;
 
 public class UserSession implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Long userId;
+    private String userId;
     private String username;
     private String displayName;
     private UserRole role;
 
     public UserSession() {}
 
-    public UserSession(Long userId, String username, String displayName, UserRole role) {
+    public UserSession(String userId, String username, String displayName, UserRole role) {
         this.userId = userId;
         this.username = username;
         this.displayName = displayName;
@@ -24,7 +24,7 @@ public class UserSession implements Serializable {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
