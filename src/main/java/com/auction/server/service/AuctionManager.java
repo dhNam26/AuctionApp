@@ -7,6 +7,9 @@ import com.auction.shared.dto.UserSession;
 import com.auction.shared.exception.AuthenticationException;
 import com.auction.shared.model.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 public class AuctionManager {
     private static volatile AuctionManager instance = null;
 
@@ -63,5 +66,70 @@ public class AuctionManager {
             }
         }
         throw new AuthenticationException("Tên đăng nhập hoặc mật khẩu không chính xác");
+    }
+
+    public synchronized Auction createAuction(Item item, String sellerId, String sellerName, LocalDateTime startTime, LocalDateTime endTime) {
+        if (item == null || sellerName == null || sellerId == null) {
+            throw new IllegalArgumentException("Sản phẩm và người bán không được để trống!");
+        }
+
+        if (endTime.isBefore(startTime)) {
+            throw new IllegalArgumentException("Thời gian kết thúc không thể trước thời gian bắt đầu!");
+        }
+
+        Auction newAuction = new Auction(item, sellerId, sellerName, startTime, endTime);
+
+        snapshot.setNextAuctionId(snapshot.getNextAuctionId() + 1);
+
+        snapshot.getAuctions().add(newAuction);
+
+        saveData();
+
+        System.out.println("Đã tạo thành công phiên đấu giá cho món hàng: " + item.getName());
+        return newAuction;
+    }
+
+    public synchronized boolean placeBid(String auctionId, String bidderId, BigDecimal bidAmount, LocalDateTime bidTime, boolean automaticBid) {
+        Auction targetAuction = null;
+
+        for (Auction auction : snapshot.getAuctions()) {
+            if (auction.getId().equals(auctionId)) {
+                targetAuction = auction;
+                break;
+            }
+        }
+
+        if (targetAuction == null) {
+            System.err.println("Lỗi: Không tìm thấy phiên đấu giá có ID = " + auctionId);
+            return false;
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+        if (now.isBefore(targetAuction.getStartTime())) {
+            System.err.println("Lỗi: Phiên đấu giá chưa bắt đầu!");
+            return false;
+        }
+        if (now.isAfter(targetAuction.getEndTime())) {
+            System.err.println("Lỗi: Phiên đấu giá đã kết thúc!");
+            return false;
+        }
+
+        BigDecimal currentPrice = targetAuction.getCurrentPrice();
+
+        if (bidAmount.compareTo(currentPrice) <= 0) {
+            System.err.println("Lỗi: Giá đặt (" + bidAmount + ") phải lớn hơn giá hiện tại (" + currentPrice + ")");
+            return false;
+        }
+
+        BidTransaction newBid = new BidTransaction(auctionId, bidderId, bidAmount, bidTime, automaticBid);
+
+        targetAuction.getBidHistory().add(newBid);
+
+        targetAuction.setCurrentPrice(bidAmount);
+
+        saveData();
+
+        System.out.println("Đã đặt giá thành công: " + bidAmount);
+        return true;
     }
 }
